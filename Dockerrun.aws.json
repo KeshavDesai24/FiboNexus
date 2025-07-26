@@ -1,43 +1,36 @@
 {
-    "AWSEBDockerrunVersion": 3,
-    "containerDefinitions": [
-        {
-            "name": "client",
-            "image": "keshav635/fibonexus-client",
-            "hostname": "client",
-            "essential": false,
-            "memory": 128
-        },
-
-        {
-            "name": "server",
-            "image": "keshav635/fibonexus-server",
-            "hostname": "api",
-            "essential": false,
-            "memory": 256
-        },
-
-        {
-            "name": "worker",
-            "image": "keshav635/fibonexus-worker",
-            "hostname": "worker",
-            "essential": false,
-            "memory": 128
-        },
-
-        {
-            "name": "nginx",
-            "image": "keshav635/fibonexus-nginx",
-            "hostname": "nginx",
-            "essential": true,
-            "portMappings": [
-                {
-                    "hostPort": 80,
-                    "containerPort": 80
-                }
-            ],
-            "links": ["client", "server"],
-            "memory": 128
-        }
-    ]
+  "AWSEBDockerrunVersion": 3,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "keshav635/fibonexus-client",
+      "hostname": "client",
+      "essential": false,
+      "memory": 256,
+      "portMappings": [{ "hostPort": 3000, "containerPort": 3000 }]
+    },
+    {
+      "name": "server",
+      "image": "keshav635/fibonexus-server",
+      "hostname": "api",
+      "essential": false,
+      "memory": 256,
+      "portMappings": [{ "hostPort": 5000, "containerPort": 5000 }]
+    },
+    {
+      "name": "worker",
+      "image": "keshav635/fibonexus-worker",
+      "hostname": "worker",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "keshav635/fibonexus-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [{ "hostPort": 80, "containerPort": 80 }]
+    }
+  ]
 }

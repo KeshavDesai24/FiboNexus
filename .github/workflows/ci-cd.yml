@@ -1,0 +1,36 @@
+name: Deploy FiboNexus
+
+on:
+  push:
+    branches:
+      - main  # or 'master' if that's your default
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Run tests for client
+        run: docker build -t keshav635/fibonexus-client-test -f ./client/Dockerfile.dev ./client
+      - run: docker run -e CI=true keshav635/fibonexus-client-test npm test
+
+      - name: Build images
+        run: |
+          docker build -t keshav635/fibonexus-client ./client
+          docker build -t keshav635/fibonexus-server ./server
+          docker build -t keshav635/fibonexus-worker ./worker
+          docker build -t keshav635/fibonexus-nginx ./nginx
+
+      - name: Push images to DockerHub
+        run: |
+          docker push keshav635/fibonexus-client
+          docker push keshav635/fibonexus-server
+          docker push keshav635/fibonexus-worker
+          docker push keshav635/fibonexus-nginx
+

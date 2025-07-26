@@ -1,0 +1,41 @@
+#Environment files
+**/.env
+.env
+
+#Node.js dependencies
+**/node_modules/
+node_modules/
+
+#Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+#OS-generated cruft
+.DS_Store
+Thumbs.db
+
+#Editor files
+.vscode/
+.idea/
+*.sw?
+
+#Local build cache (optional)
+**/dist/
+**/build/
+
+#Docker volumes (if any bind-mounted data dirs)
+**/pgdata/
+**/redis-data/
+
+#Python (if you ever add scripts or tooling)
+__pycache__/
+*.pyc
+
+#Coverage reports
+coverage/
+
+#Optional: ignore uploads/temp file dirs
+uploads/
+tmp/

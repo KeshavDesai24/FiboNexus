@@ -7,7 +7,9 @@
       "hostname": "client",
       "essential": false,
       "memory": 256,
-      "portMappings": [{ "hostPort": 3000, "containerPort": 3000 }]
+      "portMappings": [
+        { "hostPort": 3000, "containerPort": 3000 }
+      ]
     },
     {
       "name": "server",
@@ -15,7 +17,9 @@
       "hostname": "api",
       "essential": false,
       "memory": 256,
-      "portMappings": [{ "hostPort": 5000, "containerPort": 5000 }]
+      "portMappings": [
+        { "hostPort": 5000, "containerPort": 5000 }
+      ]
     },
     {
       "name": "worker",
@@ -30,7 +34,9 @@
       "hostname": "nginx",
       "essential": true,
       "memory": 256,
-      "portMappings": [{ "hostPort": 80, "containerPort": 80 }]
+      "portMappings": [
+        { "hostPort": 80, "containerPort": 80 }
+      ]
     }
   ]
 }

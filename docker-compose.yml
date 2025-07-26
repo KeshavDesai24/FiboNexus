@@ -1,49 +1,28 @@
+version: "3"
 services:
-  postgres:
-    image: 'postgres:latest'
-    env_file:
-      - ./postgres/.env
-
-  redis:
-    image: 'redis:latest'
-  nginx:
+  client:
+    image: "keshav635/fibonexus-client"
+    mem_limit: 128m
+    hostname: client
     restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    ports:
-      - '4000:80'
-  api:
-    depends_on:
-      - redis
-      - postgres
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./server
-    volumes:
-      - /app/node_modules
-      - ./server:/app   
+  server:
+    image: "keshav635/fibonexus-server"
+    mem_limit: 128m
+    hostname: api
+    restart: always
     env_file:
       - ./server/.env
-
-  client:
-    env_file:
-      - ./client/.env
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./client
-    volumes:
-      - /app/node_modules
-      - ./client:/app
-
   worker:
-    depends_on:
-      - redis
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./worker
-    volumes:
-      - /app/node_modules
-      - ./worker:/app
+    image: "keshav635/fibonexus-worker"
+    mem_limit: 128m
+    hostname: worker
+    restart: always
     env_file:
       - ./worker/.env
+  nginx:
+    image: "keshav635/fibonexus-nginx"
+    mem_limit: 128m
+    hostname: nginx
+    restart: always
+    ports:
+      - "80:80"

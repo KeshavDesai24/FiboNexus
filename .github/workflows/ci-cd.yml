@@ -35,3 +35,32 @@ jobs:
           docker push keshav635/fibonexus-worker
           docker push keshav635/fibonexus-nginx
 
+      # Deployment
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ap-south-1
+
+      - name: Zip the deployment files
+        run: |
+          zip -r fibonexus-deploy.zip . -x "*.git*" "*node_modules*" "*.github*" "client/Dockerfile.dev"
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp fibonexus-deploy.zip s3://elasticbeanstalk-ap-south-1-640168441927
+
+      - name: Create new application version in Elastic Beanstalk
+        run: |
+          aws elasticbeanstalk create-application-version \
+            --application-name FiboNexus \
+            --version-label v-${{ github.run_number }} \
+            --source-bundle S3Bucket=elasticbeanstalk-ap-south-1-640168441927,S3Key=fibonexus-deploy.zip
+
+      - name: Deploy to Elastic Beanstalk
+        run: |
+          aws elasticbeanstalk update-environment \
+            --environment-name FiboNexus-env \
+            --version-label v-${{ github.run_number }}
+

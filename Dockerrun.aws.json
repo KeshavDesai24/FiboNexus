@@ -6,20 +6,14 @@
       "image": "keshav635/fibonexus-client",
       "hostname": "client",
       "essential": false,
-      "memory": 256,
-      "portMappings": [
-        { "hostPort": 3000, "containerPort": 3000 }
-      ]
+      "memory": 256
     },
     {
       "name": "server",
       "image": "keshav635/fibonexus-server",
       "hostname": "api",
       "essential": false,
-      "memory": 256,
-      "portMappings": [
-        { "hostPort": 5000, "containerPort": 5000 }
-      ]
+      "memory": 256
     },
     {
       "name": "worker",

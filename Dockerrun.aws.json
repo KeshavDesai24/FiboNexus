@@ -6,21 +6,21 @@
       "image": "keshav635/fibonexus-client",
       "hostname": "client",
       "essential": false,
-      "memory": 256
+      "memory": 512
     },
     {
       "name": "server",
       "image": "keshav635/fibonexus-server",
       "hostname": "api",
       "essential": false,
-      "memory": 256
+      "memory": 512
     },
     {
       "name": "worker",
       "image": "keshav635/fibonexus-worker",
       "hostname": "worker",
       "essential": false,
-      "memory": 128
+      "memory": 256
     },
     {
       "name": "nginx",

@@ -45,7 +45,8 @@ jobs:
 
       - name: Zip the deployment files
         run: |
-          zip -r fibonexus-deploy.zip . -x "*.git*" "*node_modules*" "*.github*" "client/Dockerfile.dev"
+          zip -r fibonexus-deploy.zip . \
+            -x "*.git*" "*node_modules*" "*.github*" "client/*" "server/*" "worker/*" "nginx/*" "docker-compose-dev.yml" "*.env"
 
       - name: Upload to S3
         run: |

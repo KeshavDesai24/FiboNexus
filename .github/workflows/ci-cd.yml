@@ -48,9 +48,12 @@ jobs:
           zip -r fibonexus-deploy.zip . \
             -x "*.git*" "*node_modules*" "*.github*" "client/*" "server/*" "worker/*" "nginx/*" "docker-compose-dev.yml" "*.env"
 
+      - name: List ZIP contents
+        run: unzip -l fibonexus-deploy.zip
+
       - name: Upload to S3
         run: |
-          aws s3 cp fibonexus-deploy.zip s3://elasticbeanstalk-ap-south-1-640168441927
+          aws s3 cp fibonexus-deploy.zip s3://elasticbeanstalk-ap-south-1-640168441927/
 
       - name: Create new application version in Elastic Beanstalk
         run: |

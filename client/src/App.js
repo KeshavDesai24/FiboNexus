@@ -22,7 +22,7 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other Page</Link>
           <h1>FiboNexus</h1>
-          <p>Calculate your Fibonacci Index in Style 🚀</p>
+          <p>Calculate your Fibonacci Index in Style</p>
 
         </header>
         <div>
